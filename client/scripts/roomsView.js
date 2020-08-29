@@ -8,19 +8,30 @@ var RoomsView = {
   initialize: function() {
     RoomsView.$addroom.on('click', function() {return RoomsView.addRoom($('#roomText').val())}),
     // anonymous fn -> make addRoom invocation when clicking the button (n)
-    RoomsView.$select.on('change', RoomsView.renderRoom)
+    RoomsView.$select.on('change', RoomsView.render)
     ;
   },
 
   render: function() {
-    //
-
+    $('#chats').empty();
     for (let i = 0; i < Rooms.length; i++) {
       RoomsView.renderRoom(Rooms[i]);
     }
   },
 
-  renderRoom: function(roomname) {
+  renderRoom: function(message) {
+    // when we click the specific room in the select menu,
+    //  should display specific room messages.
+
+    // if roomname of message matches selected roomname $('option:selected').text()
+    // var obj = {'username': message.username, 'text': message.text};
+
+    if (message.roomname === $('option:selected').text()) {
+      // append that message to the #chats html
+      var obj = {'username': message.username, 'text': message.text};
+      var html = MessageView.render(obj);
+      $('#chats').append(html);
+    }
   },
 
   //
