@@ -3,25 +3,39 @@ var RoomsView = {
   $room: $('#rooms .room'),
   $select: $('select'),
   $addroom: $('.room'),
+  // $roomform: $('#addRoom'),
 
   initialize: function() {
-    RoomsView.$addroom.on('submit', RoomsView.addRoom);
+    RoomsView.$addroom.on('click', function() {return RoomsView.addRoom($('#roomText').val())}),
+    // anonymous fn -> make addRoom invocation when clicking the button (n)
+    RoomsView.$select.on('change', RoomsView.renderRoom)
+    ;
   },
 
   render: function() {
     //
+
+    for (let i = 0; i < Rooms.length; i++) {
+      RoomsView.renderRoom(Rooms[i]);
+    }
   },
 
   renderRoom: function(roomname) {
-    // set var optiontag,
-    var optionTag = `<option value="${roomname}">${roomname}</option>`;
-
-    $('select').append(optionTag);
   },
 
   //
   addRoom: function(roomname) {
-    //
+    console.log('should be roomname:',roomname)
+    // once the user types roomname and click add button,
+    var optionTag = _.template(`<option value="<%= roomname %>"><%= roomname %></option>`);
+    var obj = {roomname: roomname};
+    console.log(obj);
+    $('#rooms select').append(optionTag(obj));
+    // var room = {
+    //   messages:
+    // };
+
+      // render the roomname in the select io
   }
 };
 

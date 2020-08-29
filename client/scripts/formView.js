@@ -1,10 +1,10 @@
 var FormView = {
 
-  $form: $('form'),
+  $form: $('form'), // $('#send')
   $refresh: $('.refresh'),
 
   initialize: function() {
-    FormView.$form.on('submit', FormView.handleSubmit);
+    FormView.$form.on('submit', FormView.handleSubmit); // not invoking (just reference)
     FormView.$refresh.on('click', FormView.refresh);
   },
 
@@ -21,7 +21,7 @@ var FormView = {
     var message = {
       username: window.location.search.substring(10),
       text: $('#message').val(),
-      roomname: 'testing'
+      roomname: $('option:selected').val()
     };
 
     // send msg in server(POST)
@@ -29,7 +29,7 @@ var FormView = {
 
     console.log('submit click!');
 
-    // receive the updated data
+    // receive the updated data (GET)
     App.fetch();
   },
 

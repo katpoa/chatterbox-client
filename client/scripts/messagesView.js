@@ -9,20 +9,17 @@ var MessagesView = {
 
   render: function() {
     // how to render the messages
-    var html = '';
-
+    // var html = '';
     // iterate through Messages(data.results)
     for (let i = 0; i < Messages.length; i++) {
-      // <%= key %> the key should match with the html
-      html += MessageView.render({'username': Messages[i].username, 'text': Messages[i].text});
+      // if Messages[i].roomname matches selected roomname
+      if (Messages[i].roomname === $( "#selectRoom option:selected" ).text()) {
+        MessagesView.renderMessage(Messages[i]);
+      }
     }
-    // we can define cbfunction
-
-    $('#chats').append(html);
-    // append....rendered template?
   },
 
-  // renderMessage : render one message
+  // renderMessage : render one message(when submitting new msg)
   renderMessage: function(message) {
     // add message to Messages
     var obj = {'username': message.username, 'text': message.text};

@@ -24,8 +24,10 @@ var App = {
 
       // to access data in the MessagesView, set data.result to global var Messages
       Messages = data.results;
+      Rooms = data.results;
       MessagesView.render();
-      callback();
+      RoomsView.render();
+      callback();  // just for stopSpinner
     });
   },
 
